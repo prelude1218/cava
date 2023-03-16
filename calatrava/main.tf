@@ -6,6 +6,14 @@ variable "nsname" {
 
 }
 
+variable "cspToken"{
+
+}
+
+variable "decription"{
+
+}
+
 terraform {
   required_providers {
     pacific = {
@@ -24,7 +32,7 @@ terraform {
 #   - Select the **Cloud Consumption Service User** role, by searching **Cascade** in the Service Roles
 #   - Also check the **OpenID** scope checkbox. And click `GENERATE`
 provider "pacific" {
-  ccs_api_token = "XXXYourAPITokenHereXXX"
+  ccs_api_token = var.token
 }
 
 # Keep the nimbus server/config/ip values, they are fine for you to use
@@ -36,7 +44,7 @@ resource "pacific_ccs_namespace" "ns" {
   # To deploy to on-prem use calatrava-sc/calatrava-wdc
   region  = "calatrava-wdc"
   class   = "calatrava-default"
-  description = "XXX put any description here"
+  description = var.description
 }
 
 # save kubeconfig to "supervisor namespace", i.e. our "cloud API"
