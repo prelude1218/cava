@@ -18,9 +18,9 @@ terraform {
   required_providers {
     pacific = {
       # The legacy locally installed pacific provider
-      # source = "eng.vmware.com/calatrava/pacific"
+      source = "eng.vmware.com/calatrava/pacific"
 
-      source = "cdickmann-terraform-registry.object1-wdc.calatrava.vmware.com/terraform-registry/pacific"
+#       source = "cdickmann-terraform-registry.object1-wdc.calatrava.vmware.com/terraform-registry/pacific"
     }
   }
 }
