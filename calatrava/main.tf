@@ -1,5 +1,5 @@
 variable "user" {
-
+  
 }
 
 variable "nsname" {
@@ -10,7 +10,7 @@ variable "cspToken"{
 
 }
 
-variable "decription"{
+variable "description"{
 
 }
 
@@ -18,9 +18,9 @@ terraform {
   required_providers {
     pacific = {
       # The legacy locally installed pacific provider
-      source = "eng.vmware.com/calatrava/pacific"
+      # source = "eng.vmware.com/calatrava/pacific"
 
-#       source = "cdickmann-terraform-registry.object1-wdc.calatrava.vmware.com/terraform-registry/pacific"
+      source = "cdickmann-terraform-registry.object1-wdc.calatrava.vmware.com/terraform-registry/pacific"
     }
   }
 }
@@ -32,7 +32,7 @@ terraform {
 #   - Select the **Cloud Consumption Service User** role, by searching **Cascade** in the Service Roles
 #   - Also check the **OpenID** scope checkbox. And click `GENERATE`
 provider "pacific" {
-  ccs_api_token = var.token
+  ccs_api_token = var.cspToken
 }
 
 # Keep the nimbus server/config/ip values, they are fine for you to use
