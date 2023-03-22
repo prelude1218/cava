@@ -81,7 +81,7 @@ resource "pacific_guestcluster" "tkc" {
         }
   }
   tags = {
-    any_tag_you_want = "TAP"
+    tap_version = "TAP 1.4.1"
   }
 }
 
