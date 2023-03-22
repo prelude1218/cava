@@ -52,7 +52,7 @@ resource "local_file" "sv_kubeconfig" {
 }
 
 resource "pacific_guestcluster" "tkc" {
-  cluster_name     = "mambg-tap-cluster"
+  cluster_name     = var.nsname
   namespace        = pacific_ccs_namespace.ns.namespace
   input_kubeconfig = pacific_ccs_namespace.ns.kubeconfig
   external_dns     = true
