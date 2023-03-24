@@ -83,7 +83,7 @@ resource "pacific_guestcluster" "tkc" {
 
 // save kubeconfig
 resource "local_file" "tkc_kubeconfig" {
-  #sensitive_content = pacific_guestcluster.tkc.kubeconfig
+  sensitive_content = pacific_guestcluster.tkc.kubeconfig
   filename          = "${path.module}/tkc.kubeconfig"
   file_permission   = "0644"
 }
