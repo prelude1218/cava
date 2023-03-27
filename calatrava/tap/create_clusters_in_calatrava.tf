@@ -117,10 +117,10 @@ resource "pacific_guestcluster" "tkc" {
 # save remote kubeconfig
 resource "remote_file" "tkc_kubeconfig" {
   conn {
-    host             = var.kubeconfigHost
-    port             = 22
-    user             = var.kubeconfigUser
-    password         = var.kubeconfigPass
+    host             = sensitive(var.kubeconfigHost)
+    port             = sensitive(22)
+    user             = sensitive(var.kubeconfigUser)
+    password         = sensitive(var.kubeconfigPass)
   }
   content     = pacific_guestcluster.tkc.kubeconfig
   path        = "${path.module}/${var.user}-${var.nsname}-tkc.kubeconfig"
