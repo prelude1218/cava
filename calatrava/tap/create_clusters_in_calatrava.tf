@@ -14,10 +14,26 @@ variable "description"{
 
 }
 
+variable "kubeconfigHost"{
+
+}
+
+variable "kubeconfigUser"{
+
+}
+
+variable "kubeconfigPass"{
+
+}
+
 terraform {
   required_providers {
     pacific = {
       source = "cdickmann-terraform-registry.object1-wdc.calatrava.vmware.com/terraform-registry/pacific"
+    }
+    remote = {
+      source  = "tenstad/remote"
+      version = "0.1.1"
     }
   }
 }
@@ -43,6 +59,19 @@ resource "pacific_ccs_namespace" "ns" {
   class   = "calatrava-default"
   description = var.description
 }
+
+# # save remote kubeconfig to "supervisor namespace", i.e. our "cloud API"
+# resource "remote_file" "sv_kubeconfig" {
+#   conn {
+#     host             = var.kubeconfigHost
+#     port             = 22
+#     user             = var.kubeconfigUser
+#     password         = var.kubeconfigPass
+#   }
+#   content     = pacific_ccs_namespace.ns.kubeconfig
+#   path        = "${path.module}/${var.user}-${var.nsname}-sv.kubeconfig"
+#   permissions = "0644"
+# }
 
 # save kubeconfig to "supervisor namespace", i.e. our "cloud API"
 resource "local_file" "sv_kubeconfig" {
@@ -85,11 +114,22 @@ resource "pacific_guestcluster" "tkc" {
   }
 }
 
-// save kubeconfig
+# save remote kubeconfig
+resource "remote_file" "tkc_kubeconfig" {
+  conn {
+    host             = var.kubeconfigHost
+    port             = 22
+    user             = var.kubeconfigUser
+    password         = var.kubeconfigPass
+  }
+  content     = pacific_guestcluster.tkc.kubeconfig
+  path        = "${path.module}/${var.user}-${var.nsname}-tkc.kubeconfig"
+  permissions = "0644"
+}
+
+# save kubeconfig
 resource "local_file" "tkc_kubeconfig" {
   sensitive_content = pacific_guestcluster.tkc.kubeconfig
   filename          = "${path.module}/es-portal-stg.kubeconfig"
   file_permission   = "0644"
 }
-
-
