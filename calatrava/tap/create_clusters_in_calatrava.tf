@@ -130,6 +130,6 @@ resource "remote_file" "tkc_kubeconfig" {
 # save kubeconfig
 resource "local_file" "tkc_kubeconfig" {
   sensitive_content = pacific_guestcluster.tkc.kubeconfig
-  filename          = "${path.module}/es-portal-stg.kubeconfig"
+  filename          = "${path.module}/tkc.kubeconfig"
   file_permission   = "0644"
 }
