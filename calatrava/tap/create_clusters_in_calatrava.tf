@@ -14,6 +14,10 @@ variable "description"{
 
 }
 
+variable "calatravaRegion"{
+
+}
+
 variable "kubeconfigHost"{
 
 }
@@ -55,7 +59,7 @@ resource "pacific_ccs_namespace" "ns" {
   name    = var.nsname
 
   # Right now only WDC and VMC regions are available in CCS (calatrava-vmc, calatrava-wdc)
-  region  = "calatrava-wdc"
+  region  = var.calatravaRegion
   class   = "calatrava-default"
   description = var.description
 }
